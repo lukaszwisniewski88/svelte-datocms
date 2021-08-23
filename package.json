@@ -3,6 +3,7 @@
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "svelte-kit dev",
+		"package": "svelte-kit package",
 		"build": "svelte-kit build",
 		"preview": "svelte-kit preview",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
@@ -27,6 +28,7 @@
 		"svelte-check": "^2.0.0",
 		"svelte-intersection-observer": "^0.7.1",
 		"svelte-preprocess": "^4.7.4",
+		"svelte2tsx": "^0.4.5",
 		"tailwindcss": "^2.2.4",
 		"tslib": "^2.0.0",
 		"typescript": "^4.0.0"
