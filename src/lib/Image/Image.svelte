@@ -97,7 +97,7 @@
 
 <IntersectionObserver bind:intersecting={$state.inView} {element} threshold={intersectionTreshold}>
 	<div
-		class="relative"
+		class="relative-positioning"
 		bind:this={element}
 		style={`display:${explicitWidth ? 'inline-block' : 'block'}`}
 	>
@@ -110,7 +110,7 @@
 			style={explicitWidth ? `width:${width}px` : ''}
 		/>
 		<div
-			class="absolute inset-0"
+			class="absolute-positioning"
 			class:vsible={!showImage}
 			style={`background-color:${data.bgColor ? data.bgColor : '#000'};` +
 				`background-image:url(${data.base64});background-size:cover;`}
@@ -126,9 +126,9 @@
 						alt={data.alt}
 						title={data.title}
 						on:load={loadHandler}
-						class:opacity-1={showImage}
-						class:opacity-0={!showImage}
-						class="absolute inset-0 transition-opacity"
+						class:visible={showImage}
+						class:invisible={!showImage}
+						class="absolute-positioning transition-opacity"
 						style={`transition-duration:${fadeInDuration}ms;`}
 					/>
 				{/if}
@@ -136,3 +136,32 @@
 		{/if}
 	</div>
 </IntersectionObserver>
+
+<style>
+	.absolute-positioning {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+	}
+	.relative-positioning {
+		position: relative;
+	}
+	.transition-opacity {
+		transition-property: opacity;
+		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	}
+	.block {
+		display: block;
+	}
+	.w-full {
+		width: 100%;
+	}
+	.visible {
+		opacity: 1;
+	}
+	.invisible {
+		opacity: 0;
+	}
+</style>
