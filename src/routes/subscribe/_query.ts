@@ -1,3 +1,5 @@
+import type { StructuredTextGraphQlResponse } from 'datocms-structured-text-to-html-string';
+
 type ResponsiveImageType = {
 	/** The aspect ratio (width/height) of the image */
 	aspectRatio: number;
@@ -25,7 +27,7 @@ type ResponsiveImageType = {
 type BlogPost = {
 	id: string;
 	title: string;
-	excerpt: unknown;
+	excerpt: StructuredTextGraphQlResponse;
 	slug: string;
 	coverImage: {
 		responsiveImage: ResponsiveImageType;

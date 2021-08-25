@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Image from '$lib/Image/Image.svelte';
+	import StructuredText from '$lib/StructuredText/StructuredText.svelte';
 	import { useQuerySubscription } from '$lib/useQuerySubscription';
 	import type { QueryResponseType, QueryVariables } from './_query';
 	import { query } from './_query';
@@ -19,7 +20,7 @@
 	$: console.log(data);
 </script>
 
-<main class="container mx-auto">
+<main class="container px-8 mx-auto">
 	<h1 class="text-5xl font-semibold">Dato CMS Blog</h1>
 	<h2 class="text-2xl">News, tips, highlights, and other updates from the team at DatoCMS.</h2>
 	<div class="flex flex-row gap-6 m-4 place-items-center">
@@ -40,22 +41,30 @@
 		</div>
 	{/if}
 	{#if data}
-		{#each data.blogPosts as post}
-			<article class="flex flex-col gap-4 my-8">
-				<Image data={post.coverImage.responsiveImage} />
-				<h6 class="text-xl font-semibold hover:underline hover:opacity-50">
-					<a rel="external" href={`https://www.datocms.com/blog/${post.slug}`}> {post.title} </a>
-				</h6>
-				<div>
-					<pre>{post.excerpt}</pre>
-				</div>
-				<footer class="inline-flex place-items-center gap-6">
-					<div class="rounded-full h-10 w-10 overflow-hidden">
-						<Image data={post.author.avatar.responsiveImage} />
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+			{#each data.blogPosts as post}
+				<article class="flex flex-col gap-4 my-8 border shadow place-content-between">
+					<div>
+						<Image data={post.coverImage.responsiveImage} />
+						<h6 class="text-xl font-semibold hover:underline hover:opacity-50 p-2">
+							<a rel="external" href={`https://www.datocms.com/blog/${post.slug}`}>
+								{post.title}
+							</a>
+						</h6>
 					</div>
-					Written by {post.author.name}
-				</footer>
-			</article>
-		{/each}
+					<div class="p-2">
+						<StructuredText data={post.excerpt} />
+					</div>
+					<footer
+						class="inline-flex pr-2 place-items-center place-content-between gap-6 bg-gray-300"
+					>
+						<div class="h-10 w-10 overflow-hidden">
+							<Image data={post.author.avatar.responsiveImage} />
+						</div>
+						Written by {post.author.name}
+					</footer>
+				</article>
+			{/each}
+		</div>
 	{/if}
 </main>
