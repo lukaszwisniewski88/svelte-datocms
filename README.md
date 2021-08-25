@@ -55,3 +55,7 @@ Here's a complete recap of what `responsiveImage` offers:
 | punch  | number | :x:                | punch is intesivity of the color effect after decoding | 1       |
 
 # More coming soon...
+
+## Contributing
+
+Contributions are always welcome!
