@@ -53,7 +53,9 @@
 						</h6>
 					</div>
 					<div class="p-2">
-						<StructuredText data={post.excerpt} />
+						<StructuredText data={post.excerpt}>
+							<span slot="spanComponent" let:value> {value} </span>
+						</StructuredText>
 					</div>
 					<footer
 						class="inline-flex pr-2 place-items-center place-content-between gap-6 bg-gray-300"
