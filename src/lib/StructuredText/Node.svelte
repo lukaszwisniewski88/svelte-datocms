@@ -21,10 +21,8 @@
 </script>
 
 <script lang="ts">
-	import BlockquoteComponent from './components/BlockquoteComponent.svelte';
-	import HeadingComponent from './components/Heading.svelte';
-	import ListComponent from './components/ListComponent.svelte';
 	import Leaf from './Leaf.svelte';
+	import Renderer from './components/Renderer.svelte';
 	export let node:
 		| Paragraph
 		| Heading
@@ -38,45 +36,40 @@
 
 {#if hasChildren(node)}
 	{#if isList(node)}
-		<ListComponent style={node.style}>
+		<Renderer type={node.type} style={node.style}>
 			{#each node.children as leaf}
 				<svelte:self node={leaf} />
 			{/each}
-		</ListComponent>
+		</Renderer>
 	{:else if isBlockquote(node)}
-		<BlockquoteComponent attribution={node.attribution}>
+		<Renderer type={node.type} attribution={node.attribution}>
 			{#each node.children as leaf}
 				<svelte:self node={leaf} />
 			{/each}
-		</BlockquoteComponent>
+		</Renderer>
 	{:else if isListItem(node)}
-		<li>
+		<Renderer type={node.type}>
 			{#each node.children as leaf}
 				<svelte:self node={leaf} />
 			{/each}
-		</li>
+		</Renderer>
 	{:else if isParagraph(node)}
-		<p>
-			{#each node.children as leaf}
-				<Leaf {leaf}>
-					<slot name="spanComponent" />
-				</Leaf>
-			{/each}
-		</p>
-	{:else}
-		<HeadingComponent level={node.level}>
+		<Renderer type={node.type}>
 			{#each node.children as leaf}
 				<Leaf {leaf} />
 			{/each}
-		</HeadingComponent>
+		</Renderer>
+	{:else}
+		<Renderer type={node.type} level={node.level}>
+			{#each node.children as leaf}
+				<Leaf {leaf} />
+			{/each}
+		</Renderer>
 	{/if}
 {:else if isBlock(node)}
-	<!-- TODO: Know how to render BlockNode-->
-	<pre> Block node</pre>
+	<Renderer type={node.type} item={node.item} />
 {:else if isThematicBreak(node)}
-	<!-- TODO: component mapping -->
-	<hr />
+	<Renderer type={node.type} />
 {:else}
-	<!-- TODO: Render a code component-->
-	<pre>We have a code block here</pre>
+	<Renderer type={node.type} code={node.code} highlight={node.highlight} language={node.language} />
 {/if}

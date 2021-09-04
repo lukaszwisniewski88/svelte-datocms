@@ -16,7 +16,7 @@ export default {
 						},
 						{
 							type: 'span',
-							marks: ['highlight'],
+							marks: ['highlight', 'underline'],
 							value: 'title'
 						},
 						{

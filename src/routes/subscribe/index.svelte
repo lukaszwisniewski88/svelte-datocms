@@ -1,6 +1,8 @@
 <script lang="ts">
 	import Image from '$lib/Image/Image.svelte';
 	import StructuredText from '$lib/StructuredText/StructuredText.svelte';
+	import Paragraph from '$lib/StructuredText/components/Paragraph.svelte';
+	import Span from '$lib/StructuredText/components/Span.svelte';
 	import { useQuerySubscription } from '$lib/useQuerySubscription';
 	import type { QueryResponseType, QueryVariables } from './_query';
 	import { query } from './_query';
@@ -17,7 +19,7 @@
 		closed: 'Connection closed'
 	};
 	$: ({ data, error, status } = $store);
-	$: console.log(data);
+	let spanImplementation = Array(10).fill(Paragraph);
 </script>
 
 <main class="container px-8 mx-auto">
@@ -42,7 +44,7 @@
 	{/if}
 	{#if data}
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-			{#each data.blogPosts as post}
+			{#each data.blogPosts as post, i}
 				<article class="flex flex-col gap-4 my-8 border shadow place-content-between">
 					<div>
 						<Image data={post.coverImage.responsiveImage} />
@@ -53,9 +55,7 @@
 						</h6>
 					</div>
 					<div class="p-2">
-						<StructuredText data={post.excerpt}>
-							<span slot="spanComponent" let:value> {value} </span>
-						</StructuredText>
+						<StructuredText data={post.excerpt} />
 					</div>
 					<footer
 						class="inline-flex pr-2 place-items-center place-content-between gap-6 bg-gray-300"

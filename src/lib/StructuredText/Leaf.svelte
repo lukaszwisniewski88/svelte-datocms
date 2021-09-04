@@ -4,39 +4,20 @@
 </script>
 
 <script lang="ts">
-	import SpanComponent from './components/Span.svelte';
+	import Renderer from './components/Renderer.svelte';
 	export let leaf: InlineNode = undefined;
 </script>
 
 {#if hasChildren(leaf)}
-	{#if isLink(leaf)}
-		<!-- here we have a link with an url-->
-		<a href={leaf.url}>
-			{#each leaf.children as leafChild}
-				<svelte:self leaf={leafChild} />
-			{/each}
-		</a>
-	{:else}
-		<!-- here we have a ItemLink with an item id-->
-		Item Link {leaf.item}
+	<Renderer {...leaf}>
 		{#each leaf.children as leafChild}
 			<svelte:self leaf={leafChild} />
 		{/each}
-	{/if}
+	</Renderer>
 {:else if isSpan(leaf)}
 	<!-- TODO: SPAN has also MARKS! -->
-	<slot name="spanComponent" value={leaf.value} marks={leaf.marks}
-		><SpanComponent marks={leaf.marks}>
-			{#if !leaf.value.includes('\n')}
-				{leaf.value}
-			{:else}
-				{#each leaf.value.split(/\n/) as line, i}
-					{line}<br />
-				{/each}
-			{/if}
-		</SpanComponent></slot
-	>
+	<Renderer {...leaf}>{leaf.value}</Renderer>
 {:else}
 	<!-- TODO: Inline item, a component to inject for this , has only a item : ID number-->
-	Inline item : {leaf.item}
+	<Renderer type={leaf.type} item={leaf.item} />
 {/if}
