@@ -57,7 +57,7 @@ export default {
 		{
 			id: '456',
 			__typename: 'QuoteRecord',
-			quote: 'Foo bar.',
+			quote: 'We like to have some quotes, because it makes us happy.',
 			author: 'Mark Smith'
 		}
 	],

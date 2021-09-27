@@ -37,11 +37,13 @@
 
 <script lang="ts">
 	import type { NodeType, Mark } from 'datocms-structured-text-utils';
-	import { RenderError } from 'datocms-structured-text-utils';
-	import { getContext } from '../context';
+	import { getContext as getComponentsContext } from '../components.context';
+	import { getBlocksContext, getLinksContext } from '../blocks.context';
 	export let type: NodeType | Mark;
 	let errorNode;
-	const components = getContext();
+	const components = getComponentsContext();
+	const blocks = getBlocksContext();
+	const links = getLinksContext();
 	$: component = $components[type] ? $components[type] : defaultMapping[type];
 </script>
 
@@ -49,10 +51,4 @@
 	<svelte:component this={component} {...$$restProps}>
 		<slot />
 	</svelte:component>
-{:else}
-	<pre
-		bind:this={errorNode}
-		on:load={() => {
-			throw new RenderError('No component to render', errorNode);
-		}}> I have no component to render {type} </pre>
 {/if}

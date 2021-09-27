@@ -23,6 +23,7 @@
 <script lang="ts">
 	import Leaf from './Leaf.svelte';
 	import Renderer from './components/Renderer.svelte';
+	import BlockComponent from './components/Block.svelte';
 	export let node:
 		| Paragraph
 		| Heading
@@ -67,7 +68,7 @@
 		</Renderer>
 	{/if}
 {:else if isBlock(node)}
-	<Renderer type={node.type} item={node.item} />
+	<BlockComponent item={node.item} />
 {:else if isThematicBreak(node)}
 	<Renderer type={node.type} />
 {:else}

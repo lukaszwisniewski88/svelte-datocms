@@ -3,6 +3,7 @@
 	import StructuredText from '$lib/StructuredText/StructuredText.svelte';
 	import Paragraph from '$lib/StructuredText/components/Paragraph.svelte';
 	import Span from '$lib/StructuredText/components/Span.svelte';
+	import StyledSpan from '../structured/StyledSpan.svelte';
 	import { useQuerySubscription } from '$lib/useQuerySubscription';
 	import type { QueryResponseType, QueryVariables } from './_query';
 	import { query } from './_query';
@@ -55,7 +56,7 @@
 						</h6>
 					</div>
 					<div class="p-2">
-						<StructuredText data={post.excerpt} />
+						<StructuredText data={post.excerpt} components={{ span: Span }} />
 					</div>
 					<footer
 						class="inline-flex pr-2 place-items-center place-content-between gap-6 bg-gray-300"

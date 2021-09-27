@@ -1,24 +1,21 @@
 <script context="module" lang="ts">
 	import { validate } from 'datocms-structured-text-utils';
-	import type { StructuredText, NodeType } from 'datocms-structured-text-utils';
-	/**
-	 * Components to use when rendering StructuredText
-	 */
-	type ComponentsMap = Partial<Record<NodeType, new (...any) => SvelteComponentTyped>>;
+	import type { StructuredText } from 'datocms-structured-text-utils';
+	import type { ComponentsMap } from './types';
 </script>
 
 <script lang="ts">
 	import { isDocument } from 'datocms-structured-text-utils';
-	import { setContext, SvelteComponentTyped } from 'svelte';
+	import { setContext as setComponentsContext } from './components.context';
+	import { setContext as setRecordsContext } from './blocks.context';
 	import Renderer from './components/Renderer.svelte';
 	import Node from './Node.svelte';
-	import { writable } from 'svelte/store';
 	export let components: ComponentsMap = undefined;
+
 	export let data: StructuredText = undefined;
-	const componentStore = writable<ComponentsMap>({});
-	setContext('components', componentStore);
-	$: if (components)
-		Object.keys(components).forEach((key) => ($componentStore[key] = components[key]));
+
+	setComponentsContext(components);
+	setRecordsContext(data.blocks, data.links);
 </script>
 
 {#if data && isDocument(data.value) && validate(data.value)}
