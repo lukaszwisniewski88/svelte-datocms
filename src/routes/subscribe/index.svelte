@@ -1,10 +1,5 @@
 <script lang="ts">
-	import Image from '$lib/Image/Image.svelte';
-	import StructuredText from '$lib/StructuredText/StructuredText.svelte';
-	import Paragraph from '$lib/StructuredText/components/Paragraph.svelte';
-	import Span from '$lib/StructuredText/components/Span.svelte';
-	import StyledSpan from '../structured/StyledSpan.svelte';
-	import { useQuerySubscription } from '$lib/useQuerySubscription';
+	import { StructuredText, Image, useQuerySubscription } from '$lib';
 	import type { QueryResponseType, QueryVariables } from './_query';
 	import { query } from './_query';
 	let enabled = true;
@@ -20,7 +15,6 @@
 		closed: 'Connection closed'
 	};
 	$: ({ data, error, status } = $store);
-	let spanImplementation = Array(10).fill(Paragraph);
 </script>
 
 <main class="container px-8 mx-auto">
@@ -56,7 +50,7 @@
 						</h6>
 					</div>
 					<div class="p-2">
-						<StructuredText data={post.excerpt} components={{ span: Span }} />
+						<StructuredText data={post.excerpt} />
 					</div>
 					<footer
 						class="inline-flex pr-2 place-items-center place-content-between gap-6 bg-gray-300"
