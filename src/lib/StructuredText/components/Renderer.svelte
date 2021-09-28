@@ -38,12 +38,9 @@
 <script lang="ts">
 	import type { NodeType, Mark } from 'datocms-structured-text-utils';
 	import { getContext as getComponentsContext } from '../components.context';
-	import { getBlocksContext, getLinksContext } from '../blocks.context';
 	export let type: NodeType | Mark;
 	let errorNode;
 	const components = getComponentsContext();
-	const blocks = getBlocksContext();
-	const links = getLinksContext();
 	$: component = $components[type] ? $components[type] : defaultMapping[type];
 </script>
 
