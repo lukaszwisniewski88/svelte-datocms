@@ -1,6 +1,6 @@
 {
 	"name": "svelte-datocms",
-	"version": "0.5.3a",
+	"version": "0.5.4",
 	"scripts": {
 		"dev": "svelte-kit dev",
 		"package": "svelte-kit package",
