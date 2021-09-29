@@ -8,10 +8,10 @@
 	import Blockquote from './Blockquote.svelte';
 	import Emphasis from './Emphasis.svelte';
 	import Highlight from './Highlight.svelte';
-	import Strikethrough from './strikethrough.svelte';
 	import Underline from './Underline.svelte';
 	import Strong from './Strong.svelte';
 	import Thematicbreak from './Themeaticbreak.svelte';
+	import Strikethrough from './Strikethrough.svelte';
 	import ListItem from './Listitem.svelte';
 	import Link from './Link.svelte';
 	import Code from './Code.svelte';
