@@ -2,7 +2,6 @@ import { subscribeToQuery } from 'datocms-listen';
 import { writable } from 'svelte/store';
 import type { Readable } from 'svelte/store';
 import type { UnsubscribeFn, ChannelErrorData, ConnectionStatus, Options } from 'datocms-listen';
-import { browser } from '$app/env';
 
 type Maybe<T> = T | null;
 export type SubscribeToQueryOptions<QueryResult, QueryVariables> = Omit<
@@ -60,7 +59,7 @@ export function useQuerySubscription<
 					// do nothing here
 				};
 			}
-			if (browser)
+			if (window)
 				subscribeToQuery<QueryResult, QueryVariables>({
 					...subscribeToQueryOptions,
 					onStatusChange: (status) => updateStore((state) => ({ ...state, status })),

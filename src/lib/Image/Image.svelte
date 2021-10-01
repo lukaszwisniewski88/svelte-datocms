@@ -1,5 +1,4 @@
 <script context="module" lang="ts">
-	import { browser } from '$app/env';
 	export type ResponsiveImageType = {
 		/** The aspect ratio (width/height) of the image */
 		aspectRatio: number;
@@ -29,14 +28,14 @@
 		inView: boolean;
 		loaded: boolean;
 	};
-	const isIntersectionObserverAvailable = browser ? !!window.IntersectionObserver : false;
+	const isIntersectionObserverAvailable = window ? !!window.IntersectionObserver : false;
 	function imageAddStrategy(state: State) {
 		const { inView, lazyLoad, loaded } = state;
 		if (!lazyLoad) {
 			return true;
 		}
 
-		if (!browser) {
+		if (!window) {
 			return false;
 		}
 
@@ -52,7 +51,7 @@
 			return true;
 		}
 
-		if (!browser) {
+		if (!window) {
 			return false;
 		}
 
@@ -65,7 +64,7 @@
 	function svg(width: number, height: number) {
 		return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"></svg>`;
 	}
-	const universalBtoa = !browser
+	const universalBtoa = !window
 		? (str: string) => Buffer.from(str.toString(), 'binary').toString('base64')
 		: window.btoa;
 </script>
