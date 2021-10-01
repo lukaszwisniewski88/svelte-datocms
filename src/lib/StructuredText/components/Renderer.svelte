@@ -39,7 +39,6 @@
 	import type { NodeType, Mark } from 'datocms-structured-text-utils';
 	import { getContext as getComponentsContext } from '../components.context';
 	export let type: NodeType | Mark;
-	let errorNode;
 	const components = getComponentsContext();
 	$: component = $components[type] ? $components[type] : defaultMapping[type];
 </script>
