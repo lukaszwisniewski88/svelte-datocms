@@ -59,7 +59,7 @@ export function useQuerySubscription<
 					// do nothing here
 				};
 			}
-			if (window)
+			if (typeof window !== 'undefined')
 				subscribeToQuery<QueryResult, QueryVariables>({
 					...subscribeToQueryOptions,
 					onStatusChange: (status) => updateStore((state) => ({ ...state, status })),

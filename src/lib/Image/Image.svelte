@@ -28,14 +28,15 @@
 		inView: boolean;
 		loaded: boolean;
 	};
-	const isIntersectionObserverAvailable = window ? !!window.IntersectionObserver : false;
+	const browser = typeof window !== 'undefined';
+	const isIntersectionObserverAvailable = browser ? !!window.IntersectionObserver : false;
 	function imageAddStrategy(state: State) {
 		const { inView, lazyLoad, loaded } = state;
 		if (!lazyLoad) {
 			return true;
 		}
 
-		if (!window) {
+		if (!browser) {
 			return false;
 		}
 
@@ -51,7 +52,7 @@
 			return true;
 		}
 
-		if (!window) {
+		if (!browser) {
 			return false;
 		}
 
@@ -64,7 +65,7 @@
 	function svg(width: number, height: number) {
 		return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"></svg>`;
 	}
-	const universalBtoa = !window
+	const universalBtoa = !browser
 		? (str: string) => Buffer.from(str.toString(), 'binary').toString('base64')
 		: window.btoa;
 </script>
