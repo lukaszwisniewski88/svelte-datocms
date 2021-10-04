@@ -15,7 +15,7 @@
 	export let data: StructuredText = undefined;
 
 	setComponentsContext(components);
-	setRecordsContext(data.blocks, data.links);
+	setRecordsContext(data);
 </script>
 
 {#if data && isDocument(data.value) && validate(data.value)}

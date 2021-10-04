@@ -6,23 +6,23 @@ const linksMap: Record<string, DatoRecord> = {};
 const blocksContextKey = 'blocks';
 const linksContextKey = 'links';
 
-export const setContext = (
-	blocks: DatoRecord[] | undefined,
-	links: DatoRecord[] | undefined
-): void => {
-	if (blocks) {
-		blocks.forEach((block) => {
-			const { id, __typename, ...props } = block;
-			blocksMap[id] = { __typename, ...props, id };
-		});
-		svelteSetContext(blocksContextKey, blocksMap);
-	}
-	if (links) {
-		links.forEach((link) => {
-			const { id, ...props } = link;
-			linksMap[id] = { ...props, id };
-		});
-		svelteSetContext(linksContextKey, linksMap);
+export const setContext = (data): void => {
+	if (data) {
+		const { blocks, links } = data;
+		if (blocks) {
+			blocks.forEach((block) => {
+				const { id, __typename, ...props } = block;
+				blocksMap[id] = { __typename, ...props, id };
+			});
+			svelteSetContext(blocksContextKey, blocksMap);
+		}
+		if (links) {
+			links.forEach((link) => {
+				const { id, ...props } = link;
+				linksMap[id] = { ...props, id };
+			});
+			svelteSetContext(linksContextKey, linksMap);
+		}
 	}
 };
 

@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { StructuredText, SimpleStructuredText, Image, useQuerySubscription } from '$lib';
+	import { StructuredText, Image, useQuerySubscription } from '$lib';
 	import type { QueryResponseType, QueryVariables } from './_query';
 	import { query } from './_query';
-	import Root from './Root.svelte';
 	let enabled = true;
 	const store = useQuerySubscription<QueryResponseType, QueryVariables>({
 		query,
