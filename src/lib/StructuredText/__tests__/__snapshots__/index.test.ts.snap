@@ -1,0 +1,152 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StructuredText with no value renders null 1`] = `
+StructuredText {
+  "$$": Object {
+    "after_update": Array [],
+    "before_update": Array [],
+    "bound": Object {},
+    "callbacks": Object {},
+    "context": Map {},
+    "ctx": Array [
+      null,
+      undefined,
+    ],
+    "dirty": Array [
+      -1,
+    ],
+    "fragment": Object {
+      "c": [Function],
+      "d": [Function],
+      "i": [Function],
+      "l": [Function],
+      "m": [Function],
+      "o": [Function],
+      "p": [Function],
+    },
+    "not_equal": [Function],
+    "on_destroy": Array [
+      [Function],
+    ],
+    "on_disconnect": Array [],
+    "on_mount": Array [],
+    "props": Object {
+      "components": 1,
+      "data": 0,
+    },
+    "root": <div>
+      <pre>
+        No data document
+      </pre>
+      
+    </div>,
+    "skip_bound": false,
+    "update": [Function],
+  },
+  "$$set": [Function],
+  "$capture_state": [Function],
+  "$inject_state": [Function],
+}
+`;
+
+exports[`simple dast /2 with default rules renders the document 1`] = `
+StructuredText {
+  "$$": Object {
+    "after_update": Array [],
+    "before_update": Array [],
+    "bound": Object {},
+    "callbacks": Object {},
+    "context": Map {},
+    "ctx": Array [
+      Object {
+        "value": Object {
+          "document": Object {
+            "children": Array [
+              Object {
+                "children": Array [
+                  Object {
+                    "type": "span",
+                    "value": "This
+is a ",
+                  },
+                  Object {
+                    "marks": Array [],
+                    "type": "span",
+                    "value": "title",
+                  },
+                ],
+                "level": 1,
+                "type": "heading",
+              },
+            ],
+            "type": "root",
+          },
+          "schema": "dast",
+        },
+      },
+      undefined,
+    ],
+    "dirty": Array [
+      -1,
+    ],
+    "fragment": Object {
+      "c": [Function],
+      "d": [Function],
+      "i": [Function],
+      "l": [Function],
+      "m": [Function],
+      "o": [Function],
+      "p": [Function],
+    },
+    "not_equal": [Function],
+    "on_destroy": Array [
+      [Function],
+    ],
+    "on_disconnect": Array [],
+    "on_mount": Array [],
+    "props": Object {
+      "components": 1,
+      "data": 0,
+    },
+    "root": <div>
+      <div>
+        <h1
+          class="text-6xl"
+        >
+          This
+is a 
+          
+          
+          
+          
+          <strong>
+            title
+            
+             
+          </strong>
+          
+          
+          
+          
+          
+          
+          
+        </h1>
+        
+        
+        
+        
+        
+      </div>
+      
+      
+      
+    </div>,
+    "skip_bound": false,
+    "update": [Function],
+  },
+  "$$set": [Function],
+  "$capture_state": [Function],
+  "$inject_state": [Function],
+}
+`;
