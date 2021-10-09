@@ -8,8 +8,9 @@ import { StructuredText } from '../../index';
 describe('StructuredText', () => {
 	describe('with no value', () => {
 		it('renders null', () => {
-			const { component } = render(StructuredText, { data: null });
-			expect(component).toMatchSnapshot();
+			const { container } = render(StructuredText, { data: null });
+			expect(container.querySelector('pre').textContent).toBe('No data document')
+			//expect(component).toMatchSnapshot();
 		});
 	});
 });
@@ -39,7 +40,8 @@ describe('simple dast /2', () => {
 	};
 	describe('with default rules', () => {
 		it('renders the document', () => {
-			const { component } = render(StructuredText, { data: { value: structuredText } });
+			const { component, container } = render(StructuredText, { data: { value: structuredText } });
+			
 			expect(component).toMatchSnapshot();
 		});
 	});
