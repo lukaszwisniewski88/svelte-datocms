@@ -10,30 +10,52 @@ StructuredText {
     "context": Map {},
     "ctx": Array [
       Object {
-        "value": Object {
-          "document": Object {
-            "children": Array [
-              Object {
-                "children": Array [
-                  Object {
-                    "type": "span",
-                    "value": "This
+        "document": Object {
+          "children": Array [
+            Object {
+              "children": Array [
+                Object {
+                  "type": "span",
+                  "value": "This
 is a ",
-                  },
-                  Object {
-                    "marks": Array [],
-                    "type": "span",
-                    "value": "title",
-                  },
-                ],
-                "level": 1,
-                "type": "heading",
-              },
-            ],
-            "type": "root",
-          },
-          "schema": "dast",
+                },
+                Object {
+                  "marks": Array [],
+                  "type": "span",
+                  "value": "title",
+                },
+              ],
+              "level": 1,
+              "type": "heading",
+            },
+          ],
+          "type": "root",
         },
+        "schema": "dast",
+      },
+      Object {
+        "document": Object {
+          "children": Array [
+            Object {
+              "children": Array [
+                Object {
+                  "type": "span",
+                  "value": "This
+is a ",
+                },
+                Object {
+                  "marks": Array [],
+                  "type": "span",
+                  "value": "title",
+                },
+              ],
+              "level": 1,
+              "type": "heading",
+            },
+          ],
+          "type": "root",
+        },
+        "schema": "dast",
       },
       undefined,
     ],
@@ -56,7 +78,7 @@ is a ",
     "on_disconnect": Array [],
     "on_mount": Array [],
     "props": Object {
-      "components": 1,
+      "components": 2,
       "data": 0,
     },
     "root": <div>

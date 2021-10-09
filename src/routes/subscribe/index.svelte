@@ -39,7 +39,7 @@
 	{/if}
 	{#if data}
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-			{#each data.blogPosts as post, i}
+			{#each data.blogPosts as post}
 				<article class="flex flex-col gap-4 my-8 border shadow place-content-between">
 					<div>
 						<Image data={post.coverImage.responsiveImage} />
@@ -50,6 +50,7 @@
 						</h6>
 					</div>
 					<div class="p-2">
+						{@debug post}
 						<StructuredText data={post.excerpt} />
 					</div>
 					<footer
@@ -61,7 +62,10 @@
 						Written by {post.author.name}
 					</footer>
 				</article>
+				{:else}
+				No Posts
 			{/each}
 		</div>
 	{/if}
 </main>
+<slot/>

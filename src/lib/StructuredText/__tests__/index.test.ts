@@ -40,7 +40,7 @@ describe('simple dast /2', () => {
 	};
 	describe('with default rules', () => {
 		it('renders the document', () => {
-			const { component, container } = render(StructuredText, { data: { value: structuredText } });
+			const { component, container } = render(StructuredText, { data: structuredText });
 			
 			expect(component).toMatchSnapshot();
 		});

@@ -1,6 +1,6 @@
 <script context="module" lang="ts">
 	import { validate } from 'datocms-structured-text-utils';
-	import type { StructuredText } from 'datocms-structured-text-utils';
+	import type { StructuredText, Document } from 'datocms-structured-text-utils';
 	import type { ComponentsMap } from './types';
 </script>
 
@@ -12,16 +12,18 @@
 	import Node from './Node.svelte';
 	export let components: ComponentsMap = undefined;
 
-	export let data: StructuredText = undefined;
-
+	export let data: StructuredText | Document  = undefined;
+	const document = isDocument(data) ? data : data?.value 
+	
 	setComponentsContext(components);
+	
 	setRecordsContext(data);
 </script>
 
-{#if data && isDocument(data.value) && validate(data.value)}
+{#if data && validate(document)}
 	<!-- Root component -->
-	<Renderer type={data.value.document.type}>
-		{#each data.value.document.children as node}
+	<Renderer type={document.document.type}>
+		{#each document.document.children as node}
 			<Node {node} />
 		{/each}
 	</Renderer>

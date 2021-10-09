@@ -1,13 +1,14 @@
 import { setContext as svelteSetContext, getContext } from 'svelte';
-import type { Record as DatoRecord } from 'datocms-structured-text-utils';
+import type { Record as DatoRecord, StructuredText, Document } from 'datocms-structured-text-utils';
+import { isDocument } from 'datocms-structured-text-utils';
 const blocksMap: Record<string, DatoRecord> = {};
 const linksMap: Record<string, DatoRecord> = {};
 
 const blocksContextKey = 'blocks';
 const linksContextKey = 'links';
 
-export const setContext = (data): void => {
-	if (data) {
+export const setContext = (data:StructuredText | Document): void => {
+	if (data && !isDocument(data)) {
 		const { blocks, links } = data;
 		if (blocks) {
 			blocks.forEach((block) => {

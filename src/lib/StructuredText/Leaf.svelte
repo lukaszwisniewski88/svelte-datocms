@@ -11,7 +11,7 @@
 
 {#if hasChildren(leaf)}
 	{#if isLink(leaf)}
-		<Renderer {...leaf}>
+		<Renderer url={leaf.url} type={leaf.type}>
 			{#each leaf.children as leafChild}
 				<svelte:self leaf={leafChild} />
 			{/each}
@@ -25,7 +25,7 @@
 	{/if}
 {:else if isSpan(leaf)}
 	<!-- TODO: SPAN has also MARKS! -->
-	<Renderer {...leaf}>{leaf.value}</Renderer>
+	<Renderer type={leaf.type} marks={leaf.marks}>{leaf.value}</Renderer>
 {:else}
 	<!-- TODO: Inline item, a component to inject for this , has only a item : ID number-->
 	<Inline item={leaf.item} />
