@@ -11,7 +11,7 @@ describe('StructuredText', () => {
 		it('renders null', () => {
 			const { container } = render(StructuredText, { data: null });
 			expect(container.querySelector('pre').textContent).toBe('No data document')
-			//expect(component).toMatchSnapshot();
+			expect(container).toMatchSnapshot();
 		});
 	});
 });
@@ -23,7 +23,7 @@ describe('simple dast /2', () => {
 			children: [
 				{
 					type: 'heading',
-					level: 1,
+					level: 2,
 					children: [
 						{
 							type: 'span',

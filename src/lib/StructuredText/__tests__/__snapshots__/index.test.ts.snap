@@ -1,9 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`StructuredText with no value renders null 1`] = `
+<body>
+  <div>
+    <pre>
+      No data document
+    </pre>
+    
+  </div>
+</body>
+`;
+
 exports[`simple dast /2 with default rules renders the document 1`] = `
 <body>
   <div>
     <div>
+      <h2>
+        This
+is a 
+        
+        
+        
+        
+        <strong>
+          title
+          
+           
+        </strong>
+        
+        
+        
+        
+        
+        
+        
+      </h2>
       
       
       
@@ -22,6 +53,26 @@ exports[`simple dast with no links/blocks with default rules renders the documen
 <body>
   <div>
     <div>
+      <h1>
+        This
+is a 
+        
+        
+        
+        
+        <strong>
+          title
+          
+           
+        </strong>
+        
+        
+        
+        
+        
+        
+        
+      </h1>
       
       
       
@@ -40,6 +91,36 @@ exports[`with links/blocks with default rules renders the document 1`] = `
 <body>
   <div>
     <div>
+      <h1>
+        This is a
+        
+        
+        
+        
+        <mark>
+          title
+          
+           
+        </mark>
+        
+        
+        
+        
+        
+        
+        <div>
+          No component to render inlineLink DocPageRecord of ID: 123
+        </div>
+        
+        
+        <div>
+          No component to render inlineLink DocPageRecord of ID: 123
+        </div>
+        
+        
+        
+        
+      </h1>
       
       
       
