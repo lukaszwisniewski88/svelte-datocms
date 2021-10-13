@@ -11,13 +11,13 @@
 
 {#if hasChildren(leaf)}
 	{#if isLink(leaf)}
-		<Renderer url={leaf.url} type={leaf.type}>
+		<Renderer url={leaf.url} type={leaf.type} meta={leaf.meta}>
 			{#each leaf.children as leafChild}
 				<svelte:self leaf={leafChild} />
 			{/each}
 		</Renderer>
 	{:else}
-		<Inline item={leaf.item}>
+		<Inline item={leaf.item} meta={leaf.meta}>
 			{#each leaf.children as leafChild}
 				<svelte:self leaf={leafChild} />
 			{/each}
