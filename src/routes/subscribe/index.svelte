@@ -50,7 +50,6 @@
 						</h6>
 					</div>
 					<div class="p-2">
-						{@debug post}
 						<StructuredText data={post.excerpt} />
 					</div>
 					<footer
