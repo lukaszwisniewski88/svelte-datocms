@@ -13,17 +13,18 @@
 	export let components: ComponentsMap = undefined;
 
 	export let data: StructuredText | Document  = undefined;
-	const document = isDocument(data) ? data : data?.value 
-	
-	setComponentsContext(components);
-	
-	setRecordsContext(data);
+	const dast  = isDocument(data) ? data : data?.value 
+	console.log('IS DOCUMENT? ', isDocument(data), dast)
+	if(validate(dast).valid){
+		setComponentsContext(components);
+		setRecordsContext(data);
+	}
 </script>
 
-{#if data && validate(document)}
+{#if data }
 	<!-- Root component -->
-	<Renderer type={document.document.type}>
-		{#each document.document.children as node}
+	<Renderer type={dast.document.type}>
+		{#each dast.document.children as node}
 			<Node {node} />
 		{/each}
 	</Renderer>
