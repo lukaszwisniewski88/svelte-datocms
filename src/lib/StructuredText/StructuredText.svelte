@@ -14,7 +14,6 @@
 
 	export let data: StructuredText | Document  = undefined;
 	const dast  = isDocument(data) ? data : data?.value 
-	console.log('IS DOCUMENT? ', isDocument(data), dast)
 	if(validate(dast).valid){
 		setComponentsContext(components);
 		setRecordsContext(data);
