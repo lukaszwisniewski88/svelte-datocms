@@ -28,6 +28,16 @@
 		inView: boolean;
 		loaded: boolean;
 	};
+</script>
+
+<script lang="ts">
+	import inView from './inView';
+	import { writable } from 'svelte/store';
+	export let lazyLoad = true;
+	export let explicitWidth = false;
+	export let fadeInDuration = 500;
+	export let data: ResponsiveImageType;
+	export let intersectionTreshold = 0.1;
 	const browser = typeof window !== 'undefined';
 	const isIntersectionObserverAvailable = browser ? !!window.IntersectionObserver : false;
 	function imageAddStrategy(state: State) {
@@ -67,17 +77,8 @@
 	}
 	const universalBtoa = !browser
 		? (str: string) => Buffer.from(str.toString(), 'binary').toString('base64')
-		: window.btoa;
-</script>
+		: window.btoa.bind(window);
 
-<script lang="ts">
-	import IntersectionObserver from 'svelte-intersection-observer';
-	import { writable } from 'svelte/store';
-	export let lazyLoad = true;
-	export let explicitWidth = false;
-	export let fadeInDuration = 500;
-	export let data: ResponsiveImageType;
-	export let intersectionTreshold = 0.1;
 	function loadHandler() {
 		$state.loaded = true;
 	}
@@ -95,47 +96,47 @@
 	$: showImage = imageShowStrategy($state);
 </script>
 
-<IntersectionObserver bind:intersecting={$state.inView} {element} threshold={intersectionTreshold}>
+<div
+	use:inView={{ threshold: intersectionTreshold, once: true, root: null, rootMargin: '120px' }}
+	on:inview={({ detail }) => ($state.inView = detail.isInView)}
+	class="relative-positioning"
+	bind:this={element}
+	style={`display:${explicitWidth ? 'inline-block' : 'block'}`}
+>
+	<img
+		class="d-block"
+		class:w-full={!explicitWidth}
+		src={`data:image/svg+xml;base64,${universalBtoa(svg(width, height))}`}
+		alt="placeholder"
+		role="presentation"
+		style={explicitWidth ? `width:${width}px` : null}
+	/>
 	<div
-		class="relative-positioning"
-		bind:this={element}
-		style={`display:${explicitWidth ? 'inline-block' : 'block'}`}
-	>
-		<img
-			class="block"
-			class:w-full={!explicitWidth}
-			src={`data:image/svg+xml;base64,${universalBtoa(svg(width, height))}`}
-			alt="placeholder"
-			role="presentation"
-			style={explicitWidth ? `width:${width}px` : ''}
-		/>
-		<div
-			class="absolute-positioning"
-			class:vsible={!showImage}
-			style={`background-color:${data.bgColor ? data.bgColor : '#000'};` +
-				`background-image:url(${data.base64});background-size:cover;`}
-		/>
+		class="absolute-positioning"
+		class:visible={!showImage}
+		style={`background-color:${data.bgColor ? data.bgColor : '#000'};` +
+			`background-image:url(${data.base64});background-size:cover;`}
+	/>
 
-		{#if addImage}
-			<picture>
-				<source srcset={data.webpSrcSet} />
-				<source srcset={data.srcSet} />
-				{#if data.src}
-					<img
-						src={data.src}
-						alt={data.alt}
-						title={data.title}
-						on:load={loadHandler}
-						class:visible={showImage}
-						class:invisible={!showImage}
-						class="absolute-positioning transition-opacity"
-						style={`transition-duration:${fadeInDuration}ms;`}
-					/>
-				{/if}
-			</picture>
-		{/if}
-	</div>
-</IntersectionObserver>
+	{#if addImage}
+		<picture>
+			<source srcset={data.webpSrcSet} />
+			<source srcset={data.srcSet} />
+			{#if data.src}
+				<img
+					src={data.src}
+					alt={data.alt}
+					title={data.title}
+					on:load={loadHandler}
+					class:visible={showImage}
+					class:invisible={!showImage}
+					class="absolute-positioning transition-opacity"
+					style={`transition-duration:${fadeInDuration}ms;`}
+				/>
+			{/if}
+		</picture>
+	{/if}
+</div>
 
 <style>
 	.absolute-positioning {
@@ -152,7 +153,7 @@
 		transition-property: opacity;
 		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 	}
-	.block {
+	.d-block {
 		display: block;
 	}
 	.w-full {
