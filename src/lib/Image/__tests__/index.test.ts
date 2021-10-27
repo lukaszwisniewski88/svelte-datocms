@@ -31,7 +31,6 @@ describe('Image', () => {
 	afterEach(()=>cleanup())
 	describe('not visible', () => {
 		test('renders the blur-up thumb', () => {
-			console.log(inView)
 			const { container } = render(Image, { data });
 			expect(inView).toHaveBeenCalled();
 			expect(container).toMatchSnapshot();

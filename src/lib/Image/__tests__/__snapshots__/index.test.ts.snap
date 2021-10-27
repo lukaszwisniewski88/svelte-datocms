@@ -4,18 +4,18 @@ exports[`Image Image loaded shows the Image 1`] = `
 <body>
   <div>
     <div
-      class="relative-positioning svelte-ns9bnz"
+      class="relative-positioning svelte-3b44iz"
       style="display:block"
     >
       <img
         alt="placeholder"
-        class="d-block svelte-ns9bnz w-full"
+        class="d-block svelte-3b44iz w-full"
         role="presentation"
         src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3NTAiIGhlaWdodD0iNDIxIj48L3N2Zz4="
       />
        
       <div
-        class="absolute-positioning svelte-ns9bnz"
+        class="absolute-positioning svelte-3b44iz"
         style="background-color:#000;background-image:url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHBwgHBgoICAgLFQoLDhgQDg0NDh0eHREYIx8lJCIrHB0dLSs7GikyKSEuKjUlKDk1MjIyHyo4PTc+PDcxPjUBCgsLDg0OHBAQHDsoIig7Ozs7Ozs7OzsvOzs7Ozs7Ozs7Lzs7Ozs7Ozs7OzsvOzs7NTsvLy87NTU1Ly8vLzsvL//AABEIAA0AGAMBIgACEQEDEQH/xAAYAAACAwAAAAAAAAAAAAAAAAAGBwABBP/EACEQAAEEAAYDAAAAAAAAAAAAAAEAAgMEBQYHESEiFWFx/8QAFQEBAQAAAAAAAAAAAAAAAAAAAwL/xAAZEQADAAMAAAAAAAAAAAAAAAAAAQIRITH/2gAMAwEAAhEDEQA/AFxLgDWTsAd1J5TGy7hEYqNAaNgECX7sjLMQAHJTEy1Zcarfia4lJMauAxqBhLY6ZlaOzDurWvUOd3jZPfCiEh4xs//Z);background-size:cover;"
       />
        
@@ -28,7 +28,7 @@ exports[`Image Image loaded shows the Image 1`] = `
          
         <img
           alt="DatoCMS swag"
-          class="absolute-positioning transition-opacity svelte-ns9bnz visible"
+          class="absolute-positioning transition-opacity svelte-3b44iz visible"
           src="https://www.datocms-assets.com/205/image.png?ar=16%3A9&fit=crop&w=750"
           style="transition-duration:500ms;"
           title="These are awesome, we know that."
@@ -43,18 +43,18 @@ exports[`Image Visible renders the Image 1`] = `
 <body>
   <div>
     <div
-      class="relative-positioning svelte-ns9bnz"
+      class="relative-positioning svelte-3b44iz"
       style="display:block"
     >
       <img
         alt="placeholder"
-        class="d-block svelte-ns9bnz w-full"
+        class="d-block svelte-3b44iz w-full"
         role="presentation"
         src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3NTAiIGhlaWdodD0iNDIxIj48L3N2Zz4="
       />
        
       <div
-        class="absolute-positioning svelte-ns9bnz visible"
+        class="absolute-positioning svelte-3b44iz visible"
         style="background-color:#000;background-image:url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHBwgHBgoICAgLFQoLDhgQDg0NDh0eHREYIx8lJCIrHB0dLSs7GikyKSEuKjUlKDk1MjIyHyo4PTc+PDcxPjUBCgsLDg0OHBAQHDsoIig7Ozs7Ozs7OzsvOzs7Ozs7Ozs7Lzs7Ozs7Ozs7OzsvOzs7NTsvLy87NTU1Ly8vLzsvL//AABEIAA0AGAMBIgACEQEDEQH/xAAYAAACAwAAAAAAAAAAAAAAAAAGBwABBP/EACEQAAEEAAYDAAAAAAAAAAAAAAEAAgMEBQYHESEiFWFx/8QAFQEBAQAAAAAAAAAAAAAAAAAAAwL/xAAZEQADAAMAAAAAAAAAAAAAAAAAAQIRITH/2gAMAwEAAhEDEQA/AFxLgDWTsAd1J5TGy7hEYqNAaNgECX7sjLMQAHJTEy1Zcarfia4lJMauAxqBhLY6ZlaOzDurWvUOd3jZPfCiEh4xs//Z);background-size:cover;"
       />
        
@@ -67,7 +67,7 @@ exports[`Image Visible renders the Image 1`] = `
          
         <img
           alt="DatoCMS swag"
-          class="absolute-positioning transition-opacity svelte-ns9bnz invisible"
+          class="absolute-positioning transition-opacity svelte-3b44iz invisible"
           src="https://www.datocms-assets.com/205/image.png?ar=16%3A9&fit=crop&w=750"
           style="transition-duration:500ms;"
           title="These are awesome, we know that."
@@ -82,18 +82,18 @@ exports[`Image not visible renders the blur-up thumb 1`] = `
 <body>
   <div>
     <div
-      class="relative-positioning svelte-ns9bnz"
+      class="relative-positioning svelte-3b44iz"
       style="display:block"
     >
       <img
         alt="placeholder"
-        class="d-block svelte-ns9bnz w-full"
+        class="d-block svelte-3b44iz w-full"
         role="presentation"
         src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3NTAiIGhlaWdodD0iNDIxIj48L3N2Zz4="
       />
        
       <div
-        class="absolute-positioning svelte-ns9bnz visible"
+        class="absolute-positioning svelte-3b44iz visible"
         style="background-color:#000;background-image:url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHBwgHBgoICAgLFQoLDhgQDg0NDh0eHREYIx8lJCIrHB0dLSs7GikyKSEuKjUlKDk1MjIyHyo4PTc+PDcxPjUBCgsLDg0OHBAQHDsoIig7Ozs7Ozs7OzsvOzs7Ozs7Ozs7Lzs7Ozs7Ozs7OzsvOzs7NTsvLy87NTU1Ly8vLzsvL//AABEIAA0AGAMBIgACEQEDEQH/xAAYAAACAwAAAAAAAAAAAAAAAAAGBwABBP/EACEQAAEEAAYDAAAAAAAAAAAAAAEAAgMEBQYHESEiFWFx/8QAFQEBAQAAAAAAAAAAAAAAAAAAAwL/xAAZEQADAAMAAAAAAAAAAAAAAAAAAQIRITH/2gAMAwEAAhEDEQA/AFxLgDWTsAd1J5TGy7hEYqNAaNgECX7sjLMQAHJTEy1Zcarfia4lJMauAxqBhLY6ZlaOzDurWvUOd3jZPfCiEh4xs//Z);background-size:cover;"
       />
        
