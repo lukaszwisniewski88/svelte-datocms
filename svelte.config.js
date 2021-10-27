@@ -1,19 +1,22 @@
 import preprocess from 'svelte-preprocess';
+import WindiCSS from 'vite-plugin-windicss'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	// Consult https://github.com/sveltejs/svelte-preprocess
 	// for more information about preprocessors
 	preprocess: [
-		preprocess({
-			postcss: true
-		})
+		preprocess()
 	],
 
 	kit: {
 		// hydrate the <div id="svelte"> element in src/app.html
 		target: '#svelte',
+		package: { exports: () => false },
 		vite: {
+			plugins:[
+				WindiCSS()
+			],
 			server: {
 				hmr: {
 					clientPort: process.env.HMR_HOST ? 443 : 24678,

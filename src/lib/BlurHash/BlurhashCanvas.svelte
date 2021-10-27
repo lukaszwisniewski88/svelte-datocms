@@ -1,4 +1,4 @@
-<script context="module" lang="typescript">
+<script context="module" lang="ts">
 	import { decode } from 'blurhash';
 	type DrawOptions = {
 		height: number;
