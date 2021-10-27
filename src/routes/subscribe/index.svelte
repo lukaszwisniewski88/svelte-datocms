@@ -21,6 +21,13 @@
 	<h1 class="text-5xl font-semibold">Dato CMS Blog</h1>
 	<h2 class="text-2xl">News, tips, highlights, and other updates from the team at DatoCMS.</h2>
 	<div class="flex flex-row gap-6 m-4 place-items-center">
+		{#if enabled}
+		<div class="rounded-full w-[12px] h-[12px] bg-green-400 relative">
+		<div class="rounded-full w-[12px] h-[12px] border-green-400/50 shadow-md border animate-heart-beat animate-loop absolute animate-duration-1000"/>
+		</div>
+		{:else}
+		<div class="rounded-full w-[12px] h-[12px] bg-red-400"/>
+		{/if}
 		<diu class="font-mono text sm "> Status : {statusMessage[status]}</diu>
 		<button
 			class="py-2 px-4 rounded bg-gray-500 text-white inline-flex place-items-center"
@@ -37,7 +44,7 @@
 			{/if}
 		</div>
 	{/if}
-	{#if data}
+	{#if data && enabled}
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 			{#each data.blogPosts as post}
 				<article class="flex flex-col gap-4 my-8 border shadow place-content-between">
