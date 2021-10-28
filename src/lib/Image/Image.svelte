@@ -105,11 +105,10 @@
 >
 	<img
 		class="d-block"
-		class:w-full={!explicitWidth}
 		src={`data:image/svg+xml;base64,${universalBtoa(svg(width, height))}`}
 		alt="placeholder"
 		role="presentation"
-		style={explicitWidth ? `width:${width}px` : null}
+		style={explicitWidth ? `width:${width}px` : 'width:100%'}
 	/>
 	<div
 		class="absolute-positioning"
@@ -155,9 +154,6 @@
 	}
 	.d-block {
 		display: block;
-	}
-	.w-full {
-		width: 100%;
 	}
 	.visible {
 		opacity: 1;
