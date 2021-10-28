@@ -3,17 +3,19 @@
 	import type { QueryResponseType, QueryVariables } from './_query';
 	import { query } from './_query';
 	let enabled = true;
-	const store = useQuerySubscription<QueryResponseType, QueryVariables>({
-		query,
-		variables: { first: 10 },
-		token: 'faeb9172e232a75339242faafb9e56de8c8f13b735f7090964',
-		enabled
-	});
+	let pageSize = 10
+	let pageSizeTemp = 10
 	const statusMessage = {
 		connecting: 'Connecting to DatoCMS...',
 		connected: 'Connected to DatoCMS, receiving live updates!',
 		closed: 'Connection closed'
 	};
+	$: store = useQuerySubscription<QueryResponseType, QueryVariables>({
+		query,
+		variables: { first: pageSize },
+		token: 'faeb9172e232a75339242faafb9e56de8c8f13b735f7090964',
+		enabled
+	});
 	$: ({ data, error, status } = $store);
 </script>
 
@@ -33,6 +35,12 @@
 			class="py-2 px-4 rounded bg-gray-500 text-white inline-flex place-items-center"
 			on:click={() => (enabled = !enabled)}>{enabled ? 'Disconnect' : 'Connect'}</button
 		>
+	</div>
+	<div>
+		<span>
+			Page size : {pageSizeTemp}
+		</span>
+		<input type=range min=1 max=25 bind:value={pageSizeTemp} on:mouseup={()=>pageSize = pageSizeTemp}/>
 	</div>
 
 	{#if error}
