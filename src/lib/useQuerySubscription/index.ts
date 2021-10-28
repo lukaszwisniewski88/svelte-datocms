@@ -53,10 +53,8 @@ export function useQuerySubscription<
 				updateStore((state) => ({ ...state, status: 'closed' }));
 				return () => {
 					if (unsubscribe) {
-						console.log('closing...');
 						unsubscribe();
 					}
-					// do nothing here
 				};
 			}
 			if (typeof window !== 'undefined')
@@ -69,8 +67,9 @@ export function useQuerySubscription<
 				}).then((result) => (unsubscribe = result));
 
 			return () => {
-				console.log('closing...');
-				if (unsubscribe) unsubscribe();
+				if (unsubscribe) {
+					unsubscribe();	
+				}
 			};
 		}
 	);
