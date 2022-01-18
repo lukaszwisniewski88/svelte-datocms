@@ -18,15 +18,15 @@ export default function (
 		once: false
 	}
 ): ActionReturnType {
-    let observer : IntersectionObserver
-	const dispatch = (isInView:boolean) => {
-		const event = new CustomEvent<{isInView:boolean}>('inview', { detail: { isInView } });
+	let observer: IntersectionObserver;
+	const dispatch = (isInView: boolean) => {
+		const event = new CustomEvent<{ isInView: boolean }>('inview', { detail: { isInView } });
 		node.dispatchEvent(event);
 	};
 	const observerCallback: IntersectionObserverCallback = (entries) => {
 		entries.forEach((entry) => {
 			if (entry !== null) {
-				dispatch( false);
+				dispatch(false);
 				if (entry.isIntersecting) {
 					dispatch(true);
 					if (options.once) observer.unobserve(node);
@@ -34,16 +34,15 @@ export default function (
 			}
 		});
 	};
-    const initialize = ({root,rootMargin,threshold} = options)=>{
-        observer = new IntersectionObserver(observerCallback, { root, rootMargin, threshold });
-        observer.observe(node);
-    }
-    initialize()
+	const initialize = ({ root, rootMargin, threshold } = options) => {
+		observer = new IntersectionObserver(observerCallback, { root, rootMargin, threshold });
+		observer.observe(node);
+	};
+	initialize();
 	return {
 		update(properties) {
-            observer.disconnect()
-            initialize(properties)
-			console.log('update called!');
+			observer.disconnect();
+			initialize(properties);
 		},
 		destroy() {
 			observer && observer.disconnect();

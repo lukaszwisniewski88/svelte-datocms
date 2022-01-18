@@ -1,35 +1,3 @@
-<script context="module" lang="ts">
-	export type ResponsiveImageType = {
-		/** The aspect ratio (width/height) of the image */
-		aspectRatio: number;
-		/** A base64-encoded thumbnail to offer during image loading */
-		base64?: string;
-		/** The height of the image */
-		height?: number;
-		/** The width of the image */
-		width: number;
-		/** The HTML5 `sizes` attribute for the image */
-		sizes?: string;
-		/** The fallback `src` attribute for the image */
-		src?: string;
-		/** The HTML5 `srcSet` attribute for the image */
-		srcSet?: string;
-		/** The HTML5 `srcSet` attribute for the image in WebP format, for browsers that support the format */
-		webpSrcSet?: string;
-		/** The background color for the image placeholder */
-		bgColor?: string;
-		/** Alternate text (`alt`) for the image */
-		alt?: string;
-		/** Title attribute (`title`) for the image */
-		title?: string;
-	};
-	type State = {
-		lazyLoad: boolean;
-		inView: boolean;
-		loaded: boolean;
-	};
-</script>
-
 <script lang="ts">
 	import inView from './inView';
 	import { writable } from 'svelte/store';
@@ -40,7 +8,7 @@
 	export let intersectionTreshold = 0.1;
 	const browser = typeof window !== 'undefined';
 	const isIntersectionObserverAvailable = browser ? !!window.IntersectionObserver : false;
-	function imageAddStrategy(state: State) {
+	function imageAddStrategy(state: ImageState) {
 		const { inView, lazyLoad, loaded } = state;
 		if (!lazyLoad) {
 			return true;
@@ -53,10 +21,9 @@
 		if (isIntersectionObserverAvailable) {
 			return inView || loaded;
 		}
-
 		return true;
 	}
-	function imageShowStrategy(state: State) {
+	function imageShowStrategy(state: ImageState) {
 		const { lazyLoad, loaded } = state;
 		if (!lazyLoad) {
 			return true;
@@ -84,14 +51,12 @@
 	}
 	const { width, aspectRatio } = data;
 	const height = data.height || width / aspectRatio;
-	let element: HTMLDivElement;
 
-	const state = writable<State>({
+	const state = writable<ImageState>({
 		lazyLoad,
 		inView: false,
 		loaded: false
 	});
-
 	$: addImage = imageAddStrategy($state);
 	$: showImage = imageShowStrategy($state);
 </script>
@@ -99,28 +64,35 @@
 <div
 	use:inView={{ threshold: intersectionTreshold, once: true, root: null, rootMargin: '120px' }}
 	on:inview={({ detail }) => ($state.inView = detail.isInView)}
+	aria-label="image container"
 	class="relative-positioning"
-	bind:this={element}
-	style={`display:${explicitWidth ? 'inline-block' : 'block'}`}
+	style:display={explicitWidth ? 'inline-block' : 'block'}
 >
 	<img
 		class="d-block"
 		src={`data:image/svg+xml;base64,${universalBtoa(svg(width, height))}`}
-		alt="placeholder"
-		role="presentation"
-		style={explicitWidth ? `width:${width}px` : 'width:100%'}
+		role="none"
+		alt="placeholder sizing"
+		style:width={explicitWidth ? `${width}px` : '100%'}
 	/>
 	<div
 		class="absolute-positioning"
+		role="presentation"
+		aria-label="placeholder image"
 		class:visible={!showImage}
-		style={`background-color:${data.bgColor ? data.bgColor : '#000'};` +
-			`background-image:url(${data.base64});background-size:cover;`}
+		style:background-color={data.bgColor || '#000'}
+		style:background-image={`url(${data.base64}`}
+		style:background-size="cover"
 	/>
 
 	{#if addImage}
 		<picture>
-			<source srcset={data.webpSrcSet} />
-			<source srcset={data.srcSet} />
+			{#if data.webpSrcSet}
+				<source srcset={data.webpSrcSet} />
+			{/if}
+			{#if data.srcSet}
+				<source srcset={data.srcSet} />
+			{/if}
 			{#if data.src}
 				<img
 					src={data.src}
@@ -129,8 +101,8 @@
 					on:load={loadHandler}
 					class:visible={showImage}
 					class:invisible={!showImage}
-					class="absolute-positioning transition-opacity"
-					style={`transition-duration:${fadeInDuration}ms;`}
+					class="transition-opacity absolute-positioning"
+					style:transition-duration={`${fadeInDuration}ms;`}
 				/>
 			{/if}
 		</picture>
