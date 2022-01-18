@@ -7,7 +7,7 @@ const linksMap: Record<string, DatoRecord> = {};
 const blocksContextKey = 'blocks';
 const linksContextKey = 'links';
 
-export const setContext = (data:StructuredText | Document): void => {
+export const setContext = (data: StructuredText | Document): void => {
 	if (data && !isDocument(data)) {
 		const { blocks, links } = data;
 		if (blocks) {

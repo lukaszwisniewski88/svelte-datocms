@@ -68,7 +68,7 @@ export function useQuerySubscription<
 
 			return () => {
 				if (unsubscribe) {
-					unsubscribe();	
+					unsubscribe();
 				}
 			};
 		}
