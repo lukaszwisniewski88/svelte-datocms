@@ -1,27 +1,24 @@
-/**
- * @jest-environment jsdom
- */
 import type {
-	StructuredText as StructuredTextGraphQlResponse,
-	Document
+	Document,
+	StructuredText as StructuredTextGraphQlResponse
 } from 'datocms-structured-text-utils';
-import { render, cleanup } from '@testing-library/svelte';
-import { StructuredText } from '../../index';
+import { render, cleanup, screen } from '@testing-library/svelte';
+import StructuredText from '../StructuredText.svelte';
 
 afterEach(() => {
 	cleanup();
 });
-
-describe('StructuredText', () => {
-	describe('with no value', () => {
-		it('renders null', () => {
-			const { container } = render(StructuredText, { data: null });
-			expect(container.querySelector('pre').textContent).toBe('No data document');
-			expect(container).toMatchSnapshot();
+describe('Structured text with no value', () => {
+	it('renders null', () => {
+		const { container } = render(StructuredText, {
+			props: {
+				data: null
+			}
 		});
+		expect(container.querySelector('pre')?.textContent).toBe('No data document');
 	});
 });
-describe('simple dast /2', () => {
+describe('simple dast', () => {
 	const structuredText: Document = {
 		schema: 'dast',
 		document: {
@@ -33,7 +30,7 @@ describe('simple dast /2', () => {
 					children: [
 						{
 							type: 'span',
-							value: 'This\nis a '
+							value: 'This is a '
 						},
 						{
 							type: 'span',
@@ -47,46 +44,18 @@ describe('simple dast /2', () => {
 	};
 	describe('with default rules', () => {
 		it('renders the document', () => {
-			const { container } = render(StructuredText, { data: structuredText });
+			const { getByRole } = render(StructuredText, { data: structuredText });
+			const heading = getByRole('heading', {
+				level: 2
+			});
+			expect(heading.querySelector('strong')).toBeDefined();
+			expect(heading.querySelector('strong')?.textContent).toContain('title');
 
-			expect(container).toMatchSnapshot();
+			expect(heading.textContent).toContain('This is a title');
 		});
 	});
 });
-describe('simple dast with no links/blocks', () => {
-	const structuredText: StructuredTextGraphQlResponse = {
-		value: {
-			schema: 'dast',
-			document: {
-				type: 'root',
-				children: [
-					{
-						type: 'heading',
-						level: 1,
-						children: [
-							{
-								type: 'span',
-								value: 'This\nis a '
-							},
-							{
-								type: 'span',
-								marks: ['strong'],
-								value: 'title'
-							}
-						]
-					}
-				]
-			}
-		}
-	};
 
-	describe('with default rules', () => {
-		it('renders the document', () => {
-			const { container } = render(StructuredText, { data: structuredText });
-			expect(container).toMatchSnapshot();
-		});
-	});
-});
 describe('with links/blocks', () => {
 	type QuoteRecord = {
 		id: string;
@@ -174,8 +143,11 @@ describe('with links/blocks', () => {
 
 	describe('with default rules', () => {
 		it('renders the document', () => {
-			const { container } = render(StructuredText, { data: structuredText });
-			expect(container).toMatchSnapshot();
+			const { getByRole } = render(StructuredText, { data: structuredText });
+			//expect(container).toMatchSnapshot();
+			screen.logTestingPlaygroundURL();
+			expect(getByRole('heading', { level: 1 })).toBeDefined();
+			// TODO !!!
 		});
 	});
 });
