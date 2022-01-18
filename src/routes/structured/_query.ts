@@ -8,7 +8,7 @@ export default {
 			children: [
 				{
 					type: 'heading',
-					level: 1,
+					level: 3,
 					children: [
 						{
 							type: 'span',
@@ -26,6 +26,9 @@ export default {
 						{
 							type: 'itemLink',
 							item: '123',
+							meta: [
+								{id:'rel', value:'nofollow'}
+							],
 							children: [{ type: 'span', value: 'here!' }]
 						}
 					]

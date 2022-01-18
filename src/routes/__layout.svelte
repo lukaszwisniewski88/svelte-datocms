@@ -1,5 +1,5 @@
 <script>
-	import '../app.postcss';
+	import 'virtual:windi.css';
 </script>
 
 <slot />

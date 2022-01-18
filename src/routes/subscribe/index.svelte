@@ -1,20 +1,21 @@
 <script lang="ts">
-	import { StructuredText, SimpleStructuredText, Image, useQuerySubscription } from '$lib';
+	import { StructuredText, Image, useQuerySubscription } from '$lib';
 	import type { QueryResponseType, QueryVariables } from './_query';
 	import { query } from './_query';
-	import Root from './Root.svelte';
 	let enabled = true;
-	const store = useQuerySubscription<QueryResponseType, QueryVariables>({
-		query,
-		variables: { first: 10 },
-		token: 'faeb9172e232a75339242faafb9e56de8c8f13b735f7090964',
-		enabled
-	});
+	let pageSize = 10
+	let pageSizeTemp = 10
 	const statusMessage = {
 		connecting: 'Connecting to DatoCMS...',
 		connected: 'Connected to DatoCMS, receiving live updates!',
 		closed: 'Connection closed'
 	};
+	$: store = useQuerySubscription<QueryResponseType, QueryVariables>({
+		query,
+		variables: { first: pageSize },
+		token: 'faeb9172e232a75339242faafb9e56de8c8f13b735f7090964',
+		enabled
+	});
 	$: ({ data, error, status } = $store);
 </script>
 
@@ -22,11 +23,24 @@
 	<h1 class="text-5xl font-semibold">Dato CMS Blog</h1>
 	<h2 class="text-2xl">News, tips, highlights, and other updates from the team at DatoCMS.</h2>
 	<div class="flex flex-row gap-6 m-4 place-items-center">
+		{#if enabled}
+		<div class="rounded-full w-[12px] h-[12px] bg-green-400 relative">
+		<div class="rounded-full w-[12px] h-[12px] border-green-400/50 shadow-md border animate-heart-beat animate-loop absolute animate-duration-1000"/>
+		</div>
+		{:else}
+		<div class="rounded-full w-[12px] h-[12px] bg-red-400"/>
+		{/if}
 		<diu class="font-mono text sm "> Status : {statusMessage[status]}</diu>
 		<button
 			class="py-2 px-4 rounded bg-gray-500 text-white inline-flex place-items-center"
 			on:click={() => (enabled = !enabled)}>{enabled ? 'Disconnect' : 'Connect'}</button
 		>
+	</div>
+	<div>
+		<span>
+			Page size : {pageSizeTemp}
+		</span>
+		<input type=range min=1 max=25 bind:value={pageSizeTemp} on:mouseup={()=>pageSize = pageSizeTemp}/>
 	</div>
 
 	{#if error}
@@ -38,9 +52,9 @@
 			{/if}
 		</div>
 	{/if}
-	{#if data}
+	{#if data && enabled}
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-			{#each data.blogPosts as post, i}
+			{#each data.blogPosts as post}
 				<article class="flex flex-col gap-4 my-8 border shadow place-content-between">
 					<div>
 						<Image data={post.coverImage.responsiveImage} />
@@ -62,7 +76,10 @@
 						Written by {post.author.name}
 					</footer>
 				</article>
+				{:else}
+				No Posts
 			{/each}
 		</div>
 	{/if}
 </main>
+<slot/>
