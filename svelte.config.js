@@ -8,10 +8,7 @@ const config = {
 	preprocess: [preprocess()],
 
 	kit: {
-		// hydrate the <div id="svelte"> element in src/app.html
-		target: '#svelte',
 		// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-		package: { exports: (file) => file === 'index.js' },
 		vite: {
 			plugins: [WindiCSS()],
 			test: {
