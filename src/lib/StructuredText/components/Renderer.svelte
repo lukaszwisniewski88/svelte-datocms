@@ -2,7 +2,7 @@
 	import type { ComponentsMap } from '../types';
 	import Root from './Root.svelte';
 	import Span from './Span.svelte';
-	import {Heading} from './Heading';
+	import Heading from './Heading.svelte';
 	import Paragraph from './Paragraph.svelte';
 	import List from './List.svelte';
 	import Blockquote from './Blockquote.svelte';
